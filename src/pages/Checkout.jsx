@@ -102,7 +102,7 @@ const Checkout = () => {
                         {item.name}
                       </h4>
                       <p className="text-sm text-gray-600 dark:text-gray-400">
-                        ₹{item.price} x {item.quantity}
+                        ₹{item.price.toFixed(2)} x {item.quantity}
                       </p>
                     </div>
                   </div>
@@ -130,7 +130,10 @@ const Checkout = () => {
           <div className="border-t pt-4 mt-4">
             <div className="flex justify-between">
               <p className="font-medium dark:text-white">Total</p>
-              <p className="font-bold dark:text-white">₹{totalPrice}</p>
+              <p className="font-bold dark:text-white">
+                ₹{totalPrice.toFixed(2)}{" "}
+                {/* Display total price with 2 decimal places */}
+              </p>
             </div>
           </div>
         </div>

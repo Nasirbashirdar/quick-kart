@@ -1,20 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { FaMoon, FaSun } from "react-icons/fa";
 
-const ThemeToggle = () => {
-  const [darkMode, setDarkMode] = useState(false);
-
-  useEffect(() => {
-    if (darkMode) {
-      document.documentElement.classList.add("dark");
-    } else {
-      document.documentElement.classList.remove("dark");
-    }
-  }, [darkMode]);
-
+const ThemeToggle = ({ darkMode, toggleTheme }) => {
   return (
     <button
-      onClick={() => setDarkMode(!darkMode)}
+      onClick={toggleTheme}
       className="p-2 rounded-full bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600"
     >
       {darkMode ? (

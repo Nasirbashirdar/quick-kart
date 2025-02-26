@@ -1,29 +1,33 @@
 import React, { useContext } from "react";
-import { CartContext } from "../context/CartContext";
 import { Link } from "react-router-dom";
+import { CartContext } from "../context/CartContext";
 
 const ProductCard = ({ product }) => {
   const { addToCart } = useContext(CartContext);
 
   return (
-    <div className="border p-4 rounded-lg shadow-lg bg-white dark:bg-gray-800 hover:shadow-xl transition-shadow duration-300">
-      <Link to={`/product/${product.id}`}>
-        <img
-          src={product.image}
-          alt={product.name}
-          className="w-full h-48 object-cover"
-        />
-        <h3 className="text-xl font-semibold mt-2 dark:text-white">
-          {product.name}
-        </h3>
-        <p className="text-gray-700 dark:text-gray-300">₹{product.price}</p>
-      </Link>
-      <button
-        onClick={() => addToCart(product)}
-        className="mt-2 bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition-colors duration-300"
-      >
-        Add to Cart
-      </button>
+    <div className="border p-4 rounded-lg shadow-lg dark:bg-gray-800 dark:text-white">
+      <img
+        src={product.image}
+        alt={product.name}
+        className="w-full h-48 object-cover rounded-lg"
+      />
+      <h2 className="text-xl font-bold mt-2">{product.name}</h2>
+      <p className="text-gray-600 dark:text-gray-400">${product.price}</p>
+      <div className="mt-4 flex gap-2">
+        <Link
+          to={`/product/${product.id}`}
+          className="inline-block bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700"
+        >
+          View Details
+        </Link>
+        <button
+          onClick={() => addToCart(product)}
+          className="inline-block bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700"
+        >
+          Add to Cart
+        </button>
+      </div>
     </div>
   );
 };

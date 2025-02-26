@@ -1,29 +1,46 @@
-import React, { useContext } from "react";
+import React, { useState } from "react";
+import { Routes, Route } from "react-router-dom";
 import Header from "./components/Header";
+import Home from "./pages/Home";
+import ProductDetails from "./pages/ProductDetails";
+import Cart from "./pages/Cart";
+import Checkout from "./pages/Checkout";
+import Categories from "./pages/Categories";
+import Offers from "./pages/Offers";
+import Help from "./pages/Help";
 import Footer from "./components/Footer";
-import { Outlet } from "react-router-dom";
-import { CartContext } from "./context/CartContext";
-import "./index.css";
 
-function App() {
-  const { notification } = useContext(CartContext);
+const App = () => {
+  const [searchQuery, setSearchQuery] = useState("");
+  const [darkMode, setDarkMode] = useState(false);
+
+  const handleSearch = (query) => {
+    setSearchQuery(query);
+  };
+
+  const toggleTheme = () => {
+    setDarkMode((prevMode) => !prevMode); // Toggle the darkMode state
+  };
 
   return (
-    <div className="flex flex-col min-h-screen bg-white dark:bg-gray-900 text-gray-900 dark:text-white">
-      {/* Notification Banner */}
-      {notification && (
-        <div className="bg-green-500 text-white text-center p-2 animate-fade-in">
-          {notification}
-        </div>
-      )}
-
-      <Header />
-      <main className="flex-grow p-4">
-        <Outlet />
-      </main>
+    <div className={darkMode ? "dark" : ""}>
+      <Header
+        onSearch={handleSearch}
+        darkMode={darkMode}
+        toggleTheme={toggleTheme}
+      />
+      <Routes>
+        <Route path="/" element={<Home searchQuery={searchQuery} />} />
+        <Route path="/product/:id" element={<ProductDetails />} />
+        <Route path="/cart" element={<Cart />} />
+        <Route path="/checkout" element={<Checkout />} />
+        <Route path="/categories" element={<Categories />} />
+        <Route path="/offers" element={<Offers />} />
+        <Route path="/help" element={<Help />} />
+      </Routes>
       <Footer />
     </div>
   );
-}
+};
 
 export default App;

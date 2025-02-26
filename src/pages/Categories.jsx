@@ -3,7 +3,7 @@ import ProductCard from "../components/ProductCard";
 import useProducts from "../hooks/useProducts";
 import { SearchContext } from "../context/SearchContext";
 
-const Home = () => {
+const Categories = () => {
   const { allProducts, searchProducts } = useProducts();
   const { searchQuery } = useContext(SearchContext); // Use global searchQuery
   const filteredProducts = searchQuery
@@ -12,7 +12,7 @@ const Home = () => {
 
   return (
     <div className="p-4 dark:bg-gray-900 dark:text-white">
-      <h1 className="text-2xl font-bold mb-4">Welcome to QuickKart</h1>
+      <h1 className="text-2xl font-bold mb-4">Categories</h1>
       {filteredProducts.length === 0 ? (
         <p className="text-red-500">No products found for "{searchQuery}".</p>
       ) : (
@@ -26,4 +26,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default Categories;
