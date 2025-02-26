@@ -3,11 +3,18 @@ import { SearchContext } from "../context/SearchContext";
 
 const SearchBar = () => {
   const [query, setQuery] = useState("");
-  const { setSearchQuery } = useContext(SearchContext);
+  const { setSearchQuery, setIsSearching } = useContext(SearchContext);
 
   const handleSearch = (e) => {
     e.preventDefault();
     setSearchQuery(query); // Update the global searchQuery state
+    setIsSearching(true); // Indicate that a search is being performed
+  };
+
+  const handleClear = () => {
+    setQuery("");
+    setSearchQuery("");
+    setIsSearching(false); // Reset search state
   };
 
   return (
@@ -25,6 +32,15 @@ const SearchBar = () => {
       >
         Search
       </button>
+      {query && (
+        <button
+          type="button"
+          onClick={handleClear}
+          className="ml-2 bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700"
+        >
+          Clear
+        </button>
+      )}
     </form>
   );
 };
